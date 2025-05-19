@@ -1,0 +1,26 @@
+<div class="text-4xl font-bold mb-10">{{ isLogin ? 'Login' : 'Signup' }}</div>
+<form class="flex flex-col gap-4" (ngSubmit)="onSubmit(form)" #form="ngForm">
+  <label for="email">Email</label>
+  <input type="email" name="email" placeholder="Your Email Address" [(ngModel)]="email" required />
+  <label for="password">Password</label>
+  <input type="password" name="password" placeholder="Password" [(ngModel)]="password" required />
+  <div *ngIf="!isLogin" class="flex flex-col gap-4">
+    <label for="name">Name</label>
+    <input type="text" name="name" placeholder="Your Name" [(ngModel)]="name" required />
+    <label for="address">Address</label>
+    <textarea type="text" name="address" placeholder="Your Address" [(ngModel)]="address" required>
+    </textarea>
+  </div>
+
+  <!-- <a *ngIf="!isLogin">Login to your account</a> -->
+  <!-- <a *ngIf="isLogin">Create a account</a> -->
+  <button class="bg-blue-950 p-3 rounded-md" type="submit">
+    {{ isLogin ? 'Login' : 'Signup' }}
+  </button>
+  <button *ngIf="isLogin" class="bg-blue-500 p-3 rounded-md" type="button" (click)="fillAdmin()">
+    Fill admin info
+  </button>
+  <button *ngIf="isLogin" class="bg-blue-500 p-3 rounded-md" type="button" (click)="fillUser()">
+    Fill user info
+  </button>
+</form>
