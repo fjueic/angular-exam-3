@@ -1,1 +1,77 @@
-<p>inventory works!</p>
+<form class="flex flex-col gap-4" (ngSubmit)="onSubmit(productForm)" #productForm="ngForm">
+  <label for="name" class="text-xl font-bold">Name:</label>
+  <input
+    type="text"
+    class="border-black border-r-slate-500 border-2 rounded-md p-1"
+    for="name"
+    name="name"
+    placeholder="Enter Product Name"
+    [(ngModel)]="newName"
+    required
+  />
+  <label for="price" class="text-xl font-bold">Price:</label>
+  <input
+    type="text"
+    class="border-black border-r-slate-500 border-2 rounded-md p-1"
+    for="price"
+    name="price"
+    placeholder="Enter Product Price"
+    [(ngModel)]="newPrice"
+    required
+  />
+  <label for="description" class="text-xl font-bold">Description:</label>
+  <input
+    type="text"
+    class="border-black border-r-slate-500 border-2 rounded-md p-1"
+    for="description"
+    name="description"
+    placeholder="Description"
+    [(ngModel)]="newDesc"
+    required
+  />
+  <label for="image" class="text-xl font-bold">Image Link:</label>
+  <input
+    type="text"
+    class="border-black border-r-slate-500 border-2 rounded-md p-1"
+    for="image"
+    name="image"
+    placeholder="Image Link"
+    [(ngModel)]="newImage"
+    required
+  />
+  <label for="quantity" class="text-xl font-bold">Quantity:</label>
+  <div class="flex justify-center align-middle gap-2">
+    <button class="w-fit bg-red-500 p-1 rounded-md" type="button" (click)="decr()">-</button>
+    {{ count }}
+    <button class="w-fit bg-green-500 p-1 rounded-md" type="button" (click)="incr()">+</button>
+  </div>
+  <button type="submit" class="bg-blue-500 p-3 rounded-md">Add Product</button>
+</form>
+
+<div class="flex justify-center align-middle mt-10 text-2xl font-bold">Products Lists</div>
+<ul class="">
+  <li *ngFor="let product of Products">
+    <div class="w-72 flex flex-col justify-center align-middle">
+      <img class="rounded-md" src="{{ product.img }}" alt="{{ product.description }}" />
+      <div class="font-bold text-xl">{{ product.name }}</div>
+      <div class="opacity-80">{{ product.description }}</div>
+      <div>Avaiable Units:{{ product.quantity }}</div>
+      <div>Rs.{{ product.price }}</div>
+      <button
+        class="w-fit bg-green-500 p-1 rounded-md"
+        type="button"
+        (click)="editProduct(product)"
+      >
+        Edit
+      </button>
+      <button
+        class="w-fit bg-green-500 p-1 rounded-md"
+        class="w-fit bg-red-500 p-1 rounded-md"
+        type="button"
+        (click)="deleteProduct(product.id)"
+      >
+        Delete
+      </button>
+    </div>
+  </li>
+</ul>
