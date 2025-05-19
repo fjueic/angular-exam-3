@@ -5,7 +5,7 @@ import { environment } from "../environments/environment";
 
 export interface CartItem {
 	name: string;
-	quantitiy: number;
+	quantity: number;
 	price: number;
 }
 @Injectable({
@@ -13,8 +13,17 @@ export interface CartItem {
 })
 export class CartService {
 	private dbUrl: string = environment.firebase.databaseURL;
-	private emailid: string | null = localStorage.getItem("emailID");
-	constructor(private http: HttpClient) {}
+	private emailid: string | undefined | null = localStorage
+		.getItem("emailID")
+		?.replaceAll(".", "")
+		.replaceAll("@", "");
+
+	constructor(private http: HttpClient) {
+		this.emailid = localStorage
+			.getItem("emailID")
+			?.replaceAll(".", "")
+			.replaceAll("@", "");
+	}
 	addToCart(item: CartItem): Observable<any> {
 		if (!this.emailid) {
 			throw new Error("Loggin first");
@@ -23,6 +32,7 @@ export class CartService {
 	}
 	getCart(): Observable<CartItem[]> {
 		if (!this.emailid) {
+			console.log(this.emailid);
 			throw new Error("Loggin first");
 		}
 		return this.http.get<CartItem[]>(`${this.dbUrl}/cart/${this.emailid}.json`);
