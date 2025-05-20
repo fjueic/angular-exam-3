@@ -8,11 +8,14 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let product of Products">
-      <td>{{ product.name }}</td>
-      <td>{{ product.price }}</td>
-      <td>{{ getCount(product.name) }}</td>
-    </tr>
+    <ng-container *ngFor="let product of Products">
+  <tr *ngIf="getCount(product.name) > 0">
+    <td>{{ product.name }}</td>
+    <td>{{ product.price }}</td>
+    <td>{{ getCount(product.name) }}</td>
+  </tr>
+</ng-container>
+
   </tbody>
 </table>
 <div class="mt-10">Total:{{ total }}</div>

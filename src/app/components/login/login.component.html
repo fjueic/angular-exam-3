@@ -14,6 +14,10 @@
 
   <!-- <a *ngIf="!isLogin">Login to your account</a> -->
   <!-- <a *ngIf="isLogin">Create a account</a> -->
+  <div *ngIf="errorMessage" class="text-red-600 font-medium">
+    {{ errorMessage }}
+  </div>
+
   <button class="bg-blue-950 p-3 rounded-md" type="submit">
     {{ isLogin ? 'Login' : 'Signup' }}
   </button>
